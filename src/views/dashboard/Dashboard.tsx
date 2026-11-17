@@ -142,24 +142,20 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <div className="relative mb-6 overflow-hidden rounded-2xl border border-border/60 bg-gradient-primary p-6 text-primary-foreground shadow-elegant">
-        <div className="absolute inset-0 bg-mesh opacity-60 mix-blend-overlay" />
-        <div className="relative flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-foreground/70">
-              Green Medical Diagnostics · Lab Operations
-            </p>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold">
-              Welcome back, {displayName}
-            </h1>
-            <p className="text-sm text-primary-foreground/80 mt-1">
-              Here's a snapshot of what's happening in the lab today.
-            </p>
-          </div>
-          <Button asChild variant="secondary" className="bg-background text-primary hover:bg-background/90">
-            <Link to="/dashboard/forms/new"><Plus className="h-4 w-4" /> New Test Form</Link>
-          </Button>
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/60 bg-card px-4 py-3 shadow-soft">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          <span className="inline-flex items-center gap-2 font-semibold text-foreground">
+            <span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" /><span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" /></span>
+            {displayName} on duty
+          </span>
+          <span className="text-muted-foreground">{new Date().toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" })}</span>
+          <span className="text-muted-foreground"><b className="text-foreground tabular-nums">{pending.length}</b> pending</span>
+          <span className="text-muted-foreground"><b className="text-foreground tabular-nums">{processing.length}</b> in progress</span>
+          {breaches > 0 && <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-xs font-semibold text-destructive">{breaches} over SLA</span>}
         </div>
+        <Button asChild size="sm" variant="hero">
+          <Link to="/dashboard/forms/new"><Plus className="h-4 w-4" /> New Test Form</Link>
+        </Button>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
