@@ -3,7 +3,7 @@ export const SITE = {
   fullName: "Green Medical Diagnostics and Services",
   tagline: "Accurate Results. Better Health.",
   phones: ["+234 706 767 6551", "+234 902 778 8925"],
-  whatsapp: "2347067676551",
+  whatsapp: "2349027788925",
   address: "5 Elioprawo Road, opposite State Primary School, by Big Tree Junction, Port Harcourt, Rivers State, Nigeria",
   email: "greenlabs26@gmail.com",
   rcNumber: "8993592",

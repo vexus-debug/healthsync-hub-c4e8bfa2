@@ -320,9 +320,8 @@ const Index = () => {
                 <p className="col-start-2 md:col-start-3 text-sm text-muted-foreground leading-relaxed">{r.d}</p>
               </li>
             ))}
-            <li className="grid grid-cols-2 md:grid-cols-4 pt-8 gap-6">
+            <li className="grid grid-cols-2 md:grid-cols-3 pt-8 gap-6">
               {[
-                { v: "15+", l: "Years of practice" },
                 { v: "200+", l: "Tests available" },
                 { v: "24h", l: "Typical result time" },
                 { v: "98%", l: "Patient satisfaction" },

@@ -31,7 +31,6 @@ const credentials = [
 
 const stats = [
   { value: "10,000+", label: "Tests processed annually" },
-  { value: "15+", label: "Years of clinical practice" },
   { value: "98%", label: "Patient satisfaction rate" },
   { value: "24h", label: "Standard result turnaround" },
 ];
@@ -103,7 +102,7 @@ const About = () => (
     {/* Stats */}
     <section className="py-16 md:py-20 border-b border-border bg-muted/30">
       <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {stats.map((s) => (
             <div key={s.label} className="bg-background p-8 text-center">
               <p className="font-display text-3xl md:text-4xl font-bold text-primary">{s.value}</p>
