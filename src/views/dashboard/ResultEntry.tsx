@@ -12,7 +12,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { ArrowLeft, Save, CheckCircle2, FileText, AlertTriangle, Loader2, Printer, ShieldCheck, Trash2, Unlock, Lock } from "lucide-react";
+import { ArrowLeft, Save, CheckCircle2, FileText, AlertTriangle, Loader2, Printer, ShieldCheck, Trash2, Unlock, Lock, MessageSquare } from "lucide-react";
 import { Link, useNavigate, useParams } from "@/lib/router-compat";
 import { useEffect, useRef, useState } from "react";
 import { LAB_SECTIONS, LabField, TestStatus } from "@/lib/labCatalog";
@@ -30,6 +30,8 @@ import { AntibiogramPanel } from "@/components/bench/AntibiogramPanel";
 import { RemarksPanel } from "@/components/bench/RemarksPanel";
 import { CriticalBanner, CriticalValueDialog } from "@/components/bench/CriticalValueDialog";
 import { AST_KEY, REMARKS_KEY, CRITICAL_KEY, parseAst, findCriticalValues, isNoticeComplete, CriticalNotice } from "@/lib/bench";
+import { sendResultSms } from "@/lib/sms.functions";
+import { supabase as smsDb } from "@/integrations/supabase/client";
 import { approveResult, deleteTestForm, reopenApprovedResult } from "@/lib/resultAdmin";
 
 const ResultEntry = () => {
@@ -181,6 +183,19 @@ const ResultEntry = () => {
 
   const adminUser = { id: user?.id ?? "", name: profile?.display_name ?? null };
 
+  const notifyPatient = async (manual = false) => {
+    try {
+      const { data: sess } = await smsDb.auth.getSession();
+      const accessToken = sess.session?.access_token;
+      if (!accessToken) { toast.error("Sign in again to send SMS"); return; }
+      const r = await sendResultSms({ data: { serial: form.serial, accessToken } });
+      if (r.ok) toast.success("SMS sent to patient");
+      else toast.error(manual ? `SMS not sent: ${r.error}` : `Approved, but SMS not sent: ${r.error}`);
+    } catch {
+      toast.error("SMS not sent");
+    }
+  };
+
   const handleApprove = async () => {
     if (criticalBlocked) { setCriticalOpen(true); toast.error("Log the physician call for critical values first"); return; }
     setSaving(true);
@@ -190,6 +205,7 @@ const ResultEntry = () => {
       queryClient.invalidateQueries({ queryKey: ["test_forms"] });
       queryClient.invalidateQueries({ queryKey: ["test_form", serial] });
       toast.success("Result approved");
+      void notifyPatient();
     } catch (err: any) {
       toast.error(err.message || "Failed to approve");
     } finally { setSaving(false); }
@@ -457,6 +473,11 @@ const ResultEntry = () => {
             <Badge variant="secondary" className="gap-1">
               {locked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />} Approved
             </Badge>
+          )}
+          {isApproved && (
+            <Button variant="outline" size="sm" onClick={() => notifyPatient(true)} disabled={saving}>
+              <MessageSquare className="h-4 w-4" /> Resend SMS
+            </Button>
           )}
           {isLabAdmin && (
             <>
