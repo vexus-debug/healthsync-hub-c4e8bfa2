@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate, Link } from "@/lib/router-compat";
-import { LayoutDashboard, FileText, Clock, CheckCircle2, Users, Settings, Search, Bell, LogOut, Menu, Inbox, ShoppingBag, Pill, ListChecks, Plus, ScanLine } from "lucide-react";
+import { LayoutDashboard, FileText, Clock, CheckCircle2, Users, Settings, Search, Bell, LogOut, Menu, Inbox, ShoppingBag, Pill, ListChecks, Plus, ScanLine, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 import logo from "@/assets/logo.png";
@@ -40,6 +40,7 @@ const buildGroups = (isSenior: boolean, isLabAdmin: boolean) => {
   if (isSenior) manage.push(
     { to: "/dashboard/shop", label: "Shop", icon: ShoppingBag },
     { to: "/dashboard/pharmacy", label: "Pharmacy", icon: Pill },
+    { to: "/dashboard/sms-test", label: "SMS Test", icon: MessageSquare },
     { to: "/dashboard/settings", label: "Settings", icon: Settings },
   );
   groups.push({ title: "Lab Management", items: manage });

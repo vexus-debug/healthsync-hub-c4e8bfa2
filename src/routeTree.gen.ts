@@ -29,6 +29,7 @@ import { Route as DashboardResultsRouteImport } from './routes/dashboard.results
 import { Route as DashboardScientistsRouteImport } from './routes/dashboard.scientists'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardShopRouteImport } from './routes/dashboard.shop'
+import { Route as DashboardSmsTestRouteImport } from './routes/dashboard.sms-test'
 import { Route as ScanDashboardIndexRouteImport } from './routes/scan-dashboard.index'
 import { Route as ScanDashboardActivityRouteImport } from './routes/scan-dashboard.activity'
 import { Route as ScanDashboardAppointmentsRouteImport } from './routes/scan-dashboard.appointments'
@@ -141,6 +142,11 @@ const DashboardShopRoute = DashboardShopRouteImport.update({
   path: '/dashboard/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardSmsTestRoute = DashboardSmsTestRouteImport.update({
+  id: '/dashboard/sms-test',
+  path: '/dashboard/sms-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScanDashboardIndexRoute = ScanDashboardIndexRouteImport.update({
   id: '/scan-dashboard/',
   path: '/scan-dashboard/',
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/scientists': typeof DashboardScientistsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/shop': typeof DashboardShopRoute
+  '/dashboard/sms-test': typeof DashboardSmsTestRoute
   '/scan-dashboard/activity': typeof ScanDashboardActivityRoute
   '/scan-dashboard/appointments': typeof ScanDashboardAppointmentsRoute
   '/scan-dashboard/register': typeof ScanDashboardRegisterRoute
@@ -252,6 +259,7 @@ export interface FileRoutesByTo {
   '/dashboard/scientists': typeof DashboardScientistsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/shop': typeof DashboardShopRoute
+  '/dashboard/sms-test': typeof DashboardSmsTestRoute
   '/scan-dashboard/activity': typeof ScanDashboardActivityRoute
   '/scan-dashboard/appointments': typeof ScanDashboardAppointmentsRoute
   '/scan-dashboard/register': typeof ScanDashboardRegisterRoute
@@ -286,6 +294,7 @@ export interface FileRoutesById {
   '/dashboard/scientists': typeof DashboardScientistsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/shop': typeof DashboardShopRoute
+  '/dashboard/sms-test': typeof DashboardSmsTestRoute
   '/scan-dashboard/activity': typeof ScanDashboardActivityRoute
   '/scan-dashboard/appointments': typeof ScanDashboardAppointmentsRoute
   '/scan-dashboard/register': typeof ScanDashboardRegisterRoute
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/dashboard/scientists'
     | '/dashboard/settings'
     | '/dashboard/shop'
+    | '/dashboard/sms-test'
     | '/scan-dashboard/activity'
     | '/scan-dashboard/appointments'
     | '/scan-dashboard/register'
@@ -354,6 +364,7 @@ export interface FileRouteTypes {
     | '/dashboard/scientists'
     | '/dashboard/settings'
     | '/dashboard/shop'
+    | '/dashboard/sms-test'
     | '/scan-dashboard/activity'
     | '/scan-dashboard/appointments'
     | '/scan-dashboard/register'
@@ -387,6 +398,7 @@ export interface FileRouteTypes {
     | '/dashboard/scientists'
     | '/dashboard/settings'
     | '/dashboard/shop'
+    | '/dashboard/sms-test'
     | '/scan-dashboard/activity'
     | '/scan-dashboard/appointments'
     | '/scan-dashboard/register'
@@ -421,6 +433,7 @@ export interface RootRouteChildren {
   DashboardScientistsRoute: typeof DashboardScientistsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardShopRoute: typeof DashboardShopRoute
+  DashboardSmsTestRoute: typeof DashboardSmsTestRoute
   ScanDashboardActivityRoute: typeof ScanDashboardActivityRoute
   ScanDashboardAppointmentsRoute: typeof ScanDashboardAppointmentsRoute
   ScanDashboardRegisterRoute: typeof ScanDashboardRegisterRoute
@@ -577,6 +590,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/sms-test': {
+      id: '/dashboard/sms-test'
+      path: '/dashboard/sms-test'
+      fullPath: '/dashboard/sms-test'
+      preLoaderRoute: typeof DashboardSmsTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/scan-dashboard/': {
       id: '/scan-dashboard/'
       path: '/scan-dashboard'
@@ -677,6 +697,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardScientistsRoute: DashboardScientistsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardShopRoute: DashboardShopRoute,
+  DashboardSmsTestRoute: DashboardSmsTestRoute,
   ScanDashboardActivityRoute: ScanDashboardActivityRoute,
   ScanDashboardAppointmentsRoute: ScanDashboardAppointmentsRoute,
   ScanDashboardRegisterRoute: ScanDashboardRegisterRoute,
